@@ -14,13 +14,20 @@
   "keywords": [],
   "description": "",
   "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/nodemailer": "^6.4.8",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
     "eslint": "^8.40.0",
+    "express": "^4.18.2",
     "tsup": "^6.7.0",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4",
     "vitest": "^0.31.1",
     "zod": "^3.21.4"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.2",
+    "uuidv4": "^6.2.13"
   }
 }
