@@ -1,26 +1,25 @@
-import { User } from "../../entities/User";
-import { IMailProvider } from "../../providers/IMailProvider";
-import { IUsersRepository } from "./../../repositories/IUsersRepository";
-import { ICreateUserRequestDTO } from "./CreateUserDTO";
+import { IMailProvider } from '../../providers/IMailProvider';
+import { User } from '../../repositories/implementations/mongoDB/schemas/User';
+import { IUsersRepository } from './../../repositories/IUsersRepository';
+import { ICreateUserRequestDTO } from './CreateUserDTO';
 
 export class CreateUserUseCase {
   constructor(
     private usersRepository: IUsersRepository,
-    private mailProvider: IMailProvider
+    private mailProvider: IMailProvider,
   ) {}
 
   async execute(data: ICreateUserRequestDTO) {
     const userAlreadyExists = await this.usersRepository.findByEmail(
-      data.email
+      data.email,
     );
 
     if (userAlreadyExists) {
-      throw new Error("User already exists.");
+      throw new Error('User already exists.');
     }
 
     const user = new User(data);
-
-    await this.usersRepository.save(user);
+    const new_user = await this.usersRepository.store(user);
 
     await this.mailProvider.sendMail({
       to: {
@@ -28,11 +27,13 @@ export class CreateUserUseCase {
         email: data.email,
       },
       from: {
-        name: "Equipe da Livraria",
-        email: "equipe@livraria.com",
+        name: 'Equipe da Livraria',
+        email: 'equipe@livraria.com',
       },
-      subject: "Seja bem-vindo à plataforma.",
-      body: "<p>Você já pode fazer login em nossa plataforma.</p>",
+      subject: 'Seja bem-vindo à plataforma.',
+      body: '<p>Você já pode fazer login em nossa plataforma.</p>',
     });
+
+    return new_user;
   }
 }

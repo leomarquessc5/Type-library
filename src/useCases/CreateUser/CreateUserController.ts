@@ -1,5 +1,5 @@
-import { CreateUserUseCase } from "./CreateUserUseCase";
-import { Request, Response, response } from "express";
+import { CreateUserUseCase } from './CreateUserUseCase';
+import { Request, Response } from 'express';
 
 export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
@@ -7,16 +7,17 @@ export class CreateUserController {
     const { name, email, password } = request.body;
 
     try {
-      await this.createUserUseCase.execute({
+      const newUser = await this.createUserUseCase.execute({
         name,
         email,
         password,
       });
 
-      return response.status(201);
+      console.log('controller', newUser);
+      return response.send(newUser).status(201);
     } catch (err) {
       return response.status(400).json({
-        message: err.message || "Unexpected error.",
+        message: err.message || 'Unexpected error.',
       });
     }
   }
