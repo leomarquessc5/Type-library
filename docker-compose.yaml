@@ -1,0 +1,27 @@
+version: '1'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      target: node
+    volumes:
+      - ./src:/home/node/app/src
+    container_name: node
+    expose:
+      - '3000'
+    ports:
+      - '3000:3000'
+    command: npm run start:dev
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - ./src/database:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
