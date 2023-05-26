@@ -1,5 +1,5 @@
+import { IUser } from './../../entities/User';
 import { IMailProvider } from '../../providers/IMailProvider';
-import { User } from '../../repositories/implementations/mongoDB/schemas/User';
 import { IUsersRepository } from './../../repositories/IUsersRepository';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 
@@ -17,8 +17,7 @@ export class CreateUserUseCase {
     if (userAlreadyExists) {
       throw new Error('User already exists.');
     }
-
-    const user = new User(data);
+    const user = new IUser(data);
     const new_user = await this.usersRepository.store(user);
 
     await this.mailProvider.sendMail({

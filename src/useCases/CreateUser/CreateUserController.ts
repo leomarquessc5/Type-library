@@ -13,7 +13,6 @@ export class CreateUserController {
         password,
       });
 
-      console.log('controller', newUser);
       return response.send(newUser).status(201);
     } catch (err) {
       return response.status(400).json({

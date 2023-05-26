@@ -19,7 +19,7 @@ router.get('/users/:id', (req, res) => {
   return findUserController.handle(req, res);
 });
 
-router.get('/users/:email', (req, res) => {
+router.get('/users/email/:email', (req, res) => {
   return findUserByEmailController.handle(req, res);
 });
 
