@@ -1,0 +1,135 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Type Library API",
+    "description": "Descrição da Type libraty API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Type-Development"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Create User",
+        "description": "Store user route",
+        "tag": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "id": "1as65d1a56d1a651",
+                    "name": "Leonardo Marques",
+                    "email": "leo123@gmail.com",
+                    "password": "as15d65a1sd65a1s"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully"
+          },
+          "400": {
+            "description": "Error on create User"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update User",
+        "description": "Update user route",
+        "tag": ["Users"],
+        "parameters": {
+          "id": "1as65d1a56d1a651",
+          "in": "parameters",
+          "description": "User id"
+        },
+        "responses": {
+          "200": {
+            "description": "User updated successfully"
+          },
+          "400": {
+            "description": "Error on update User"
+          }
+        }
+      },
+      "get": {
+        "summary": "Find user by ID",
+        "description": "Find user route",
+        "tag": ["Users"],
+        "parameters": {
+          "id": "1as65d1a56d1a651",
+          "in": "parameters",
+          "description": "User id"
+        },
+        "responses": {
+          "200": {
+            "description": "User found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error on find User"
+          }
+        },
+        "delete": {
+          "summary": "Delete User",
+          "description": "Delete user route",
+          "tag": ["Users"],
+          "parameters": {
+            "id": "1as65d1a56d1a651",
+            "in": "parameters",
+            "description": "User id"
+          },
+          "responses": {
+            "200": {
+              "description": "User has been deleted"
+            },
+            "400": {
+              "description": "Error on remove User"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

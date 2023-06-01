@@ -6,7 +6,7 @@ const PORT = 3000;
 const HOSTNAME = 'http://localhost';
 
 async function main() {
-  await mongoose.connect(process.env.CONNECTIONSTRING);
+  await mongoose.connect(process.env.CONNECTIONSTRING || '');
   console.log('Database connected');
 }
 
