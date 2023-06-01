@@ -44,16 +44,20 @@
             "description": "Error on create User"
           }
         }
-      },
+      }
+    },
+    "/users/{id}": {
       "put": {
         "summary": "Update User",
         "description": "Update user route",
         "tag": ["Users"],
-        "parameters": {
-          "id": "1as65d1a56d1a651",
-          "in": "parameters",
-          "description": "User id"
-        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User id"
+          }
+        ],
         "responses": {
           "200": {
             "description": "User updated successfully"
@@ -67,11 +71,13 @@
         "summary": "Find user by ID",
         "description": "Find user route",
         "tag": ["Users"],
-        "parameters": {
-          "id": "1as65d1a56d1a651",
-          "in": "parameters",
-          "description": "User id"
-        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User id"
+          }
+        ],
         "responses": {
           "200": {
             "description": "User found",
@@ -89,23 +95,25 @@
           "400": {
             "description": "Error on find User"
           }
-        },
-        "delete": {
-          "summary": "Delete User",
-          "description": "Delete user route",
-          "tag": ["Users"],
-          "parameters": {
-            "id": "1as65d1a56d1a651",
-            "in": "parameters",
+        }
+      },
+      "delete": {
+        "summary": "Delete User",
+        "description": "Delete user route",
+        "tag": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
             "description": "User id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User has been deleted"
           },
-          "responses": {
-            "200": {
-              "description": "User has been deleted"
-            },
-            "400": {
-              "description": "Error on remove User"
-            }
+          "400": {
+            "description": "Error on remove User"
           }
         }
       }
